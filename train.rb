@@ -1,11 +1,13 @@
 class Train
 
-  attr_reader :speed, :wagon_quantity, :type
+  attr_reader :speed, :wagons, :type, :number
 
-  def initialize(number, wagon_quantity)
+  def initialize(number)
+    @type = nil
     @number = number
-    @wagon_quantity = wagon_quantity
+    @wagons = []
     @speed = 0
+    @type = type
   end
 
   def speed_up
@@ -16,19 +18,13 @@ class Train
     @speed = 0
   end
 
-  def change_wagons_quantity(change)
-    if @speed > 0
-      puts 'You have to stop the train'
-      return
-    end
-    if change == 'up'
-      @wagon_quantity += 1
-    else
-      if @wagon_quantity == 0
-        puts 'You already don`t have wagons'
-      else
-        @wagon_quantity -= 1
-      end
+  def change_wagons_quantity(change, wagon)
+    begin
+      check_conditions(change, wagon)
+      @wagons << wagon if change == 'add'
+      @wagons.delete(wagon) if change == 'remove'
+    rescue StandardError => e
+      puts e.message
     end
   end
 
@@ -62,11 +58,12 @@ class Train
 
   private
 
-  def train_type_valid?(type)
-    if [:passenger, :cargo].include?(type)
-      true
-    else
-      raise StandardError, 'Invalid train type'
-    end
+#useless for user
+  def check_conditions(change, wagon)
+    raise StandardError, 'You have to stop the train' if @speed > 0
+    raise StandardError, 'Wrong type of wagon' unless wagon.type == @type
+    raise StandardError, 'You don`t have wagons' if @wagons.count = 0
+    raise StandardError, 'You don`t have this wagon' if not @wagons.include?(wagon) && change == 'remove'
+    raise StandardError, 'You already have this wagon' if @wagons.include?(wagon) && change == 'add'
   end
 end
