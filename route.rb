@@ -5,7 +5,7 @@ class Route
   def initialize(station1, station2)
     @first_station = station1
     @last_station = station2
-    @station_list = [@first_station]
+    @station_list = [@first_station, @last_station]
   end
 
   def add_station(station)
