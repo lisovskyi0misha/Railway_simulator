@@ -63,7 +63,7 @@ class Train
     raise StandardError, 'You have to stop the train' if @speed > 0
     raise StandardError, 'Wrong type of wagon' unless wagon.type == @type
     raise StandardError, 'You don`t have wagons' if @wagons.count == 0 && change == 'remove'
-    raise StandardError, 'You don`t have this wagon' if not @wagons.include?(wagon) && change == 'remove'
+    raise StandardError, 'You don`t have this wagon' if (not @wagons.include?(wagon)) && change == 'remove'
     raise StandardError, 'You already have this wagon' if @wagons.include?(wagon) && change == 'add'
   end
 end
