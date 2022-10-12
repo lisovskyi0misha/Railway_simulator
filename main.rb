@@ -21,4 +21,4 @@ r1.add_station(s4)
 
 t1.take_route(r1)
 
-t1.change_wagons_quantity
+t1.change_wagons_quantity('add', w1)
