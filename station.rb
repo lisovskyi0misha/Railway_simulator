@@ -1,11 +1,17 @@
 class Station
 
+  @@stations = []
   attr_reader :name, :train_list, :train_type_list
+
+  def self.all
+    @@stations
+  end
 
   def initialize(name)
     @name = name
     @train_list = []
     @train_type_list = {passenger: 0, cargo: 0}
+    add_to_all
   end
 
   def take_train(train)
@@ -21,5 +27,11 @@ class Station
     else
       puts 'This train is not on the station'
     end
+  end
+
+  private
+
+  def add_to_all
+      @@stations << self
   end
 end
