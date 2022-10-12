@@ -5,7 +5,7 @@ class Station
   def initialize(name)
     @name = name
     @train_list = []
-    @train_type_list = {passenger: 0, freight: 0}
+    @train_type_list = {passenger: 0, cargo: 0}
   end
 
   def take_train(train)

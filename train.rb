@@ -2,9 +2,8 @@ class Train
 
   attr_reader :speed, :wagon_quantity, :type
 
-  def initialize(number, type, wagon_quantity)
+  def initialize(number, wagon_quantity)
     @number = number
-    @type = type if train_type_valid?(type)
     @wagon_quantity = wagon_quantity
     @speed = 0
   end
@@ -64,7 +63,7 @@ class Train
   private
 
   def train_type_valid?(type)
-    if [:passenger, :freight].include?(type)
+    if [:passenger, :cargo].include?(type)
       true
     else
       raise StandardError, 'Invalid train type'
