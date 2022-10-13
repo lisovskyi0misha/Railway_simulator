@@ -6,7 +6,7 @@ require_relative 'cargo_wagon'
 require_relative 'passenger_wagon'
 require 'pry-byebug'
 
-t1 = PassengerTrain.new(1)
+t1 = PassengerTrain.new('1')
 
 s1 = Station.new('one')
 s2 = Station.new('two')
