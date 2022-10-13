@@ -26,4 +26,6 @@ t1.take_route(r1)
 t1.change_wagons_quantity('add', w1)
 
 t1.class.instances
+t1.set_manufacturer_name('Some name')
+t1.get_manufacturer_name
 s1.class.instances

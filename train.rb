@@ -1,7 +1,9 @@
 require_relative 'instance_counter'
+require_relative 'names'
 
 class Train
   include InstanceCounter
+  include Names
   @@trains = {}
 
   attr_reader :speed, :wagons, :type, :number
