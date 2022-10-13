@@ -1,4 +1,7 @@
+require_relative 'instance_counter'
+
 class Station
+  include InstanceCounter
 
   @@stations = []
   attr_reader :name, :train_list, :train_type_list
@@ -12,6 +15,7 @@ class Station
     @train_list = []
     @train_type_list = {passenger: 0, cargo: 0}
     add_to_all
+    register_instance
   end
 
   def take_train(train)
