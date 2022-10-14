@@ -13,16 +13,9 @@ class Train
   end
 
   def initialize(number)
-    @type = nil
     @number = number
-    a = 0
-    begin
-      validate!
-    rescue StandardError => e
-      puts e.message
-      a += 1
-      retry if a < 5
-    end
+    validate!
+    @type = nil
     @wagons = []
     @speed = 0
     @type = type
