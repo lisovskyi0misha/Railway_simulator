@@ -53,9 +53,10 @@ until action == 'stop'
         puts "\nChoose one element: #{elements.keys.join(' / ')} or 'next' to skip\n\n"
         element = gets.chomp
         if elements.key?(element)
-          puts "\nChoose action: #{ACTIONS[elements[element].class].keys.join(' / ')}"
+          object_class = ACTIONS[elements[element].class]
+          puts "\nChoose action: #{object_class.keys.join(' / ')}"
           action = gets.chomp
-          elements[element].method(ACTIONS[elements[element].class][action]).call
+          elements[element].method(object_class[action]).call
         elsif element == 'next'
         else
           raise StandardError, 'Unknown element'
