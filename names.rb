@@ -1,5 +1,5 @@
 module Names
-  
+
   def set_manufacturer_name(name)
     self.instance_variable_set(:@manufacturer_name, name)
   end

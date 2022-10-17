@@ -20,11 +20,11 @@ class CargoWagon
     end
   end
 
-  def get_taken_capacity
+  def get_free_capacity
     @free_capacity
   end
 
   def get_taken_capacity
-    @free_capacity
+    @taken_capacity
   end
 end

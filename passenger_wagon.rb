@@ -1,4 +1,3 @@
-
 class PassengerWagon
   include InstanceCounter
 
