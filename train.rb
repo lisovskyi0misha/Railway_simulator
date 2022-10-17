@@ -31,13 +31,11 @@ class Train
   end
 
   def change_wagons_quantity(change, wagon)
-    begin
-      check_conditions(change, wagon)
-      @wagons << wagon if change == 'add'
-      @wagons.delete(wagon) if change == 'remove'
-    rescue StandardError => e
-      puts e.message
-    end
+    check_conditions(change, wagon)
+    @wagons << wagon if change == 'add'
+    @wagons.delete(wagon) if change == 'remove'
+  rescue StandardError => e
+    puts e.message
   end
 
   def take_route(route)
@@ -55,7 +53,7 @@ class Train
       @route = nil
     else
       @previous_station = @current_station
-      @previous_station.send_train(self)    
+      @previous_station.send_train(self)
       @current_station = @next_station
       @current_station.take_train(self)
       @next_station = @route_stations[@route_stations.index(@current_station) + 1]
@@ -65,7 +63,7 @@ class Train
   def show_stations
     puts "Previous station is #{@previous_station.name}" unless @previous_station.nil?
     puts "Current station is #{@current_station.name}"
-    puts "Next station is #{@next_station.name}" unless@next_station.nil?
+    puts "Next station is #{@next_station.name}" unless @next_station.nil?
   end
 
   def each_wagon(&block)
@@ -93,12 +91,12 @@ class Train
     raise StandardError, 'Invalid number format' unless valid?(@number)
   end
 
-#useless for user
+  # useless for user
   def check_conditions(change, wagon)
     raise StandardError, 'You have to stop the train' if @speed > 0
     raise StandardError, 'Wrong type of wagon' unless wagon.type == @type
     raise StandardError, 'You don`t have wagons' if @wagons.count == 0 && change == 'remove'
-    raise StandardError, 'You don`t have this wagon' if (not @wagons.include?(wagon)) && change == 'remove'
+    raise StandardError, 'You don`t have this wagon' if !@wagons.include?(wagon) && change == 'remove'
     raise StandardError, 'You already have this wagon' if @wagons.include?(wagon) && change == 'add'
   end
 end

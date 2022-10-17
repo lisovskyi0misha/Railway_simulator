@@ -13,13 +13,14 @@ class Station
   def initialize(name)
     @name = name
     @train_list = []
-    @train_type_list = {passenger: 0, cargo: 0}
+    @train_type_list = { passenger: 0, cargo: 0 }
     add_to_all
     register_instance
   end
 
   def take_train(train)
     return 'This train is already on station' if @train_list.include?(train)
+
     @train_list << train
     @train_type_list[train.type] += 1
   end
@@ -39,7 +40,7 @@ class Station
 
   def show_trains_statistics
     puts 'Trains:'
-    each_train do |train| 
+    each_train do |train|
       p [train.number, train.type, train.wagons.length]
       puts 'Wagons:'
       train.method(:show_wagons_statistics).call
@@ -49,6 +50,6 @@ class Station
   private
 
   def add_to_all
-      @@stations << self
+    @@stations << self
   end
 end

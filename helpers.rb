@@ -1,20 +1,20 @@
 module Helpers
   VARIANTS = {
-    passenger_train: {PassengerTrain => ['number']},
-    cargo_train: {CargoTrain => ['number']},
-    cargo_wagon: {CargoWagon => ['general_capacity']},
-    passenger_wagon: {PassengerWagon => ['general_seats']},
-    route: {Route =>  %w(first_station, last_station)},
-    station: {Station => ['name']}
+    passenger_train: { PassengerTrain => ['number'] },
+    cargo_train: { CargoTrain => ['number'] },
+    cargo_wagon: { CargoWagon => ['general_capacity'] },
+    passenger_wagon: { PassengerWagon => ['general_seats'] },
+    route: { Route => %w[first_station, last_station] },
+    station: { Station => ['name'] }
   }
 
   ACTIONS = {
-    PassengerTrain => {'show wagons' => :show_wagons_statistics},
-    CargoTrain => {'show wagons' => :show_wagons_statistics},
-    CargoWagon => {'take capacity' => :take_capacity},
-    PassengerWagon => {'take seat' => :take_seat},
-    Route => %w(first_station, last_station),
-    Station => {'show trains' => :show_trains_statistics}
+    PassengerTrain => { 'show wagons' => :show_wagons_statistics },
+    CargoTrain => { 'show wagons' => :show_wagons_statistics },
+    CargoWagon => { 'take capacity' => :take_capacity },
+    PassengerWagon => { 'take seat' => :take_seat },
+    Route => %w[first_station, last_station],
+    Station => { 'show trains' => :show_trains_statistics }
   }
 
   def get_names_from_variants

@@ -3,7 +3,6 @@ require 'pry-byebug'
 # frozen_string_literal: false
 
 module InstanceCounter
-
   def self.included(klass)
     klass.extend(ClassMethods)
   end
@@ -13,11 +12,11 @@ module InstanceCounter
 
     def instances
       check_or_create_instance_counter(self)
-      self.class_variable_get(:@@instance_counter)
+      class_variable_get(:@@instance_counter)
     end
   end
 
-   private
+  private
 
   def register_instance
     check_or_create_instance_counter(self.class)
