@@ -1,10 +1,12 @@
+# frozen_string_literal: false
+
 module Helpers
   VARIANTS = {
     passenger_train: {PassengerTrain => ['number']},
     cargo_train: {CargoTrain => ['number']},
     cargo_wagon: {CargoWagon => ['general_capacity']},
     passenger_wagon: {PassengerWagon => ['general_seats']},
-    route: {Route =>  %w(first_station, last_station)},
+    route: {Route =>  %w[first_station last_station]},
     station: {Station => ['name']}
   }
 
@@ -13,7 +15,7 @@ module Helpers
     CargoTrain => {'show wagons' => :show_wagons_statistics},
     CargoWagon => {'take capacity' => :take_capacity},
     PassengerWagon => {'take seat' => :take_seat},
-    Route => %w(first_station, last_station),
+    Route => %w[first_station  last_station],
     Station => {'show trains' => :show_trains_statistics}
   }
 

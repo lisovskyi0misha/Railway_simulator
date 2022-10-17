@@ -1,9 +1,8 @@
-require 'pry-byebug'
-
 # frozen_string_literal: false
 
-module InstanceCounter
+require 'pry-byebug'
 
+module InstanceCounter
   def self.included(klass)
     klass.extend(ClassMethods)
   end
@@ -17,7 +16,7 @@ module InstanceCounter
     end
   end
 
-   private
+  private
 
   def register_instance
     check_or_create_instance_counter(self.class)

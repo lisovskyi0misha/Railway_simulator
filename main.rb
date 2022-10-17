@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 require_relative 'cargo_train'
 require_relative 'passenger_train'
 require_relative 'station'
@@ -26,7 +28,7 @@ elements = {
 
 [elements['pt'], elements['ct']].each { |t| elements['s1'].take_train(t) }
 
-# include Helpers
+include Helpers
 until action == 'stop'
   case action
   when 'create'
@@ -58,6 +60,7 @@ until action == 'stop'
           action = gets.chomp
           elements[element].method(object_class[action]).call
         elsif element == 'next'
+          return
         else
           raise StandardError, 'Unknown element'
         end

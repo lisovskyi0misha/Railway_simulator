@@ -1,8 +1,10 @@
+# frozen_string_literal: false
+
 class PassengerWagon
   include InstanceCounter
 
   attr_reader :type, :free_seats, :taken_seats
-  
+
   def initialize(seat_number)
     @all_seats = seat_number
     @free_seats = @all_seats
@@ -11,7 +13,7 @@ class PassengerWagon
     register_instance
   end
 
-  def take_seat 
+  def take_seat
     if @taken_seats == @all_seats
       puts 'All seats are taken'
     else
