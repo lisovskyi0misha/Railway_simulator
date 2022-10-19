@@ -1,12 +1,15 @@
 # frozen_string_literal: false
 
 require_relative 'instance_counter'
+require_relative 'accessors'
 
 class Station
   include InstanceCounter
+  include Accessors
 
   @@stations = []
-  attr_reader :name, :train_list, :train_type_list
+
+  attr_accessors_with_history :name, :train_list, :train_type_list
 
   def self.all
     @@stations
