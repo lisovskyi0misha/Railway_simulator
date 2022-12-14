@@ -33,6 +33,19 @@ class Station
     end
   end
 
+  def each_train(&block)
+    @train_list.each { |train| block.call(train) }
+  end
+
+  def show_trains_statistics
+    puts 'Trains:'
+    each_train do |train| 
+      p [train.number, train.type, train.wagons.length]
+      puts 'Wagons:'
+      train.method(:show_wagons_statistics).call
+    end
+  end
+
   private
 
   def add_to_all

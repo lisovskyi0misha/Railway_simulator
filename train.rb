@@ -68,6 +68,20 @@ class Train
     puts "Next station is #{@next_station.name}" unless@next_station.nil?
   end
 
+  def each_wagon(&block)
+    @wagons.each_with_index { |wagon, ind| block.call(wagon, ind + 1) }
+  end
+
+  def show_wagons_statistics
+    each_wagon do |wagon, ind|
+      if wagon.type == :cargo
+        p [ind, wagon.type, "Taken capacity: #{wagon.taken_capacity}", "Free capacity: #{wagon.free_capacity}"]
+      else
+        p [ind, wagon.type, "Taken capacity: #{wagon.taken_seats}", "Free capacity: #{wagon.free_seats}"]
+      end
+    end
+  end
+
   private
 
   def valid?(number)
