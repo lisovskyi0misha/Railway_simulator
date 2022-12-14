@@ -1,6 +1,13 @@
+# frozen_string_literal: false
+
+require_relative 'accessors'
+require_relative 'instance_counter'
+
 class PassengerWagon
   include InstanceCounter
+  include Accessors
 
+  attr_accessors_with_history :general_seats, :free_seats, :taken_seats
   attr_reader :type, :free_seats, :taken_seats
 
   def initialize(seat_number)

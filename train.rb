@@ -1,12 +1,18 @@
+# frozen_string_literal: false
+
 require_relative 'instance_counter'
 require_relative 'names'
+require_relative 'validation'
 
 class Train
   include InstanceCounter
   include Names
+  include Validation
   @@trains = {}
 
   attr_reader :speed, :wagons, :type, :number
+
+  validate number: {format: /\A[0-9a-zA-Z]{3}-{,1}[0-9a-zA-Z]{2}\z/}
 
   def self.find(number)
     @@trains[number]
@@ -18,7 +24,6 @@ class Train
     @type = nil
     @wagons = []
     @speed = 0
-    @type = type
     @@trains[number] = self
   end
 
@@ -48,15 +53,9 @@ class Train
 
   def move_to_next_station
     if @current_station == @route_stations.last
-      @next_station = nil
-      puts 'Train has already arrived to last staion'
-      @route = nil
+      move_last
     else
-      @previous_station = @current_station
-      @previous_station.send_train(self)
-      @current_station = @next_station
-      @current_station.take_train(self)
-      @next_station = @route_stations[@route_stations.index(@current_station) + 1]
+      move_next
     end
   end
 
@@ -82,20 +81,24 @@ class Train
 
   private
 
-  def valid?(number)
-    regexp = /\A[0-9a-zA-Z]{3}-{,1}[0-9a-zA-Z]{2}\z/
-    regexp.match?(number)
+  def move_last
+    @next_station = nil
+    puts 'Train has already arrived to last staion'
+    @route = nil
   end
 
-  def validate!
-    raise StandardError, 'Invalid number format' unless valid?(@number)
+  def move_next
+    @previous_station = @current_station
+    @previous_station.send_train(self)
+    @current_station = @next_station
+    @current_station.take_train(self)
+    @next_station = @route_stations[@route_stations.index(@current_station) + 1]
   end
 
-  # useless for user
   def check_conditions(change, wagon)
-    raise StandardError, 'You have to stop the train' if @speed > 0
+    raise StandardError, 'You have to stop the train' if @speed.positive?
     raise StandardError, 'Wrong type of wagon' unless wagon.type == @type
-    raise StandardError, 'You don`t have wagons' if @wagons.count == 0 && change == 'remove'
+    raise StandardError, 'You don`t have wagons' if @wagons.count.zero? && change == 'remove'
     raise StandardError, 'You don`t have this wagon' if !@wagons.include?(wagon) && change == 'remove'
     raise StandardError, 'You already have this wagon' if @wagons.include?(wagon) && change == 'add'
   end

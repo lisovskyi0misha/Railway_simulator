@@ -1,8 +1,15 @@
+# frozen_string_literal: false
+
+require_relative 'accessors'
+require_relative 'instance_counter'
+
 class CargoWagon
   include InstanceCounter
+  include Accessors
 
+  attr_accessors_with_history :general_capacity, :free_capacity, :taken_capacity
   attr_reader :type, :free_capacity, :taken_capacity
-
+  
   def initialize(general_capacity)
     @general_capacity = general_capacity
     @free_capacity = @general_capacity
@@ -18,13 +25,5 @@ class CargoWagon
       @take_capacity += capacity
       @free_capacity -= capacity
     end
-  end
-
-  def get_free_capacity
-    @free_capacity
-  end
-
-  def get_taken_capacity
-    @taken_capacity
   end
 end

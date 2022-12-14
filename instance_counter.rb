@@ -1,5 +1,3 @@
-require 'pry-byebug'
-
 # frozen_string_literal: false
 
 module InstanceCounter

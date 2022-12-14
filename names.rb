@@ -5,7 +5,6 @@ module Names
 
   def get_manufacturer_name
     return instance_variable_get(:@manufacturer_name) if instance_variable_defined?(:@manufacturer_name)
-
     puts 'Manufacturer name isn`t set'
   end
 end

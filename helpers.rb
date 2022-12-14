@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 module Helpers
   VARIANTS = {
     passenger_train: { PassengerTrain => ['number'] },
