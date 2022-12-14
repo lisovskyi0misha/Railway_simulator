@@ -13,8 +13,9 @@ class Train
   end
 
   def initialize(number)
-    @type = nil
     @number = number
+    validate!
+    @type = nil
     @wagons = []
     @speed = 0
     @type = type
@@ -68,6 +69,15 @@ class Train
   end
 
   private
+
+  def valid?(number)
+    regexp = /\A[0-9a-zA-Z]{3}-{,1}[0-9a-zA-Z]{2}\z/
+    regexp.match?(number)
+  end
+
+  def validate!
+    raise StandardError, 'Invalid number format' unless valid?(@number)
+  end
 
 #useless for user
   def check_conditions(change, wagon)
