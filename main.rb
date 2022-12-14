@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 require_relative 'cargo_train'
 require_relative 'passenger_train'
 require_relative 'station'
@@ -7,9 +9,9 @@ require_relative 'passenger_wagon'
 require_relative 'helpers'
 require 'pry-byebug'
 
-$first_message = "\nChoose action: create (element) / choose (element) / stop\n\n"
+first_message = "\nChoose action: create (element) / choose (element) / stop\n\n"
 
-puts $first_message
+puts first_message
 action = gets.chomp
 elements = {
   's1' => Station.new('some name'),
@@ -48,7 +50,7 @@ until action == 'stop'
     end
     puts "\nElement #{name} was succesfully created\n\n"
   when 'choose'
-    if elements.length > 0 
+    if elements.length > 0
       begin
         puts "\nChoose one element: #{elements.keys.join(' / ')} or 'next' to skip\n\n"
         element = gets.chomp
@@ -58,6 +60,7 @@ until action == 'stop'
           action = gets.chomp
           elements[element].method(object_class[action]).call
         elsif element == 'next'
+          return
         else
           raise StandardError, 'Unknown element'
         end
@@ -71,6 +74,6 @@ until action == 'stop'
   else
     puts "\nUnknown action\n\n"
   end
-  puts $first_message
+  puts first_message
   action = gets.chomp
 end

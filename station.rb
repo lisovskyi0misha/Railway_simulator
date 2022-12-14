@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 require_relative 'instance_counter'
 
 class Station
@@ -20,6 +22,7 @@ class Station
 
   def take_train(train)
     return 'This train is already on station' if @train_list.include?(train)
+
     @train_list << train
     @train_type_list[train.type] += 1
   end
@@ -49,6 +52,6 @@ class Station
   private
 
   def add_to_all
-      @@stations << self
+    @@stations << self
   end
 end
