@@ -8,6 +8,7 @@ class Route
   include Accessors
 
   attr_accessors_with_history :station_list
+  attr_reader :station_list
 
   def initialize(station1, station2)
     @first_station = station1

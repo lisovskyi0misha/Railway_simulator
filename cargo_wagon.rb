@@ -8,7 +8,8 @@ class CargoWagon
   include Accessors
 
   attr_accessors_with_history :general_capacity, :free_capacity, :taken_capacity
-
+  attr_reader :type, :free_capacity, :taken_capacity
+  
   def initialize(general_capacity)
     @general_capacity = general_capacity
     @free_capacity = @general_capacity

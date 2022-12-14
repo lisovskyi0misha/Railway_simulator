@@ -95,12 +95,6 @@ class Train
     @next_station = @route_stations[@route_stations.index(@current_station) + 1]
   end
 
-  # def valid?(number)
-  #   regexp = /\A[0-9a-zA-Z]{3}-{,1}[0-9a-zA-Z]{2}\z/
-  #   regexp.match?(number)
-  # end
-
-  # useless for user
   def check_conditions(change, wagon)
     raise StandardError, 'You have to stop the train' if @speed.positive?
     raise StandardError, 'Wrong type of wagon' unless wagon.type == @type
