@@ -1,6 +1,16 @@
+require_relative 'instance_counter'
+require_relative 'names'
+
 class Train
+  include InstanceCounter
+  include Names
+  @@trains = {}
 
   attr_reader :speed, :wagons, :type, :number
+
+  def self.find(number)
+    @@trains[number]
+  end
 
   def initialize(number)
     @type = nil
@@ -8,6 +18,7 @@ class Train
     @wagons = []
     @speed = 0
     @type = type
+    @@trains[number] = self
   end
 
   def speed_up
@@ -62,8 +73,8 @@ class Train
   def check_conditions(change, wagon)
     raise StandardError, 'You have to stop the train' if @speed > 0
     raise StandardError, 'Wrong type of wagon' unless wagon.type == @type
-    raise StandardError, 'You don`t have wagons' if @wagons.count = 0
-    raise StandardError, 'You don`t have this wagon' if not @wagons.include?(wagon) && change == 'remove'
+    raise StandardError, 'You don`t have wagons' if @wagons.count == 0 && change == 'remove'
+    raise StandardError, 'You don`t have this wagon' if (not @wagons.include?(wagon)) && change == 'remove'
     raise StandardError, 'You already have this wagon' if @wagons.include?(wagon) && change == 'add'
   end
 end

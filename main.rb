@@ -4,8 +4,9 @@ require_relative 'station'
 require_relative 'route'
 require_relative 'cargo_wagon'
 require_relative 'passenger_wagon'
+require 'pry-byebug'
 
-t1 = PassengerTrain.new('1')
+t1 = PassengerTrain.new(1)
 
 s1 = Station.new('one')
 s2 = Station.new('two')
@@ -21,4 +22,10 @@ r1.add_station(s4)
 
 t1.take_route(r1)
 
-t1.change_wagons_quantity
+
+t1.change_wagons_quantity('add', w1)
+
+t1.class.instances
+t1.set_manufacturer_name('Some name')
+t1.get_manufacturer_name
+s1.class.instances
