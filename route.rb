@@ -1,9 +1,13 @@
 # frozen_string_literal: false
 
+require_relative 'accessors'
+require_relative 'instance_counter'
+
 class Route
   include InstanceCounter
+  include Accessors
 
-  attr_reader :station_list
+  attr_accessors_with_history :station_list
 
   def initialize(station1, station2)
     @first_station = station1

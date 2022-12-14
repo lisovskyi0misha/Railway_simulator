@@ -2,13 +2,17 @@
 
 require_relative 'instance_counter'
 require_relative 'names'
+require_relative 'validation'
 
 class Train
   include InstanceCounter
   include Names
+  include Validation
   @@trains = {}
 
   attr_reader :speed, :wagons, :type, :number
+
+  validate number: {format: /\A[0-9a-zA-Z]{3}-{,1}[0-9a-zA-Z]{2}\z/}
 
   def self.find(number)
     @@trains[number]
@@ -20,7 +24,6 @@ class Train
     @type = nil
     @wagons = []
     @speed = 0
-    @type = type
     @@trains[number] = self
   end
 
@@ -92,14 +95,10 @@ class Train
     @next_station = @route_stations[@route_stations.index(@current_station) + 1]
   end
 
-  def valid?(number)
-    regexp = /\A[0-9a-zA-Z]{3}-{,1}[0-9a-zA-Z]{2}\z/
-    regexp.match?(number)
-  end
-
-  def validate!
-    raise StandardError, 'Invalid number format' unless valid?(@number)
-  end
+  # def valid?(number)
+  #   regexp = /\A[0-9a-zA-Z]{3}-{,1}[0-9a-zA-Z]{2}\z/
+  #   regexp.match?(number)
+  # end
 
   # useless for user
   def check_conditions(change, wagon)

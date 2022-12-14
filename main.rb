@@ -1,12 +1,8 @@
 # frozen_string_literal: false
 
-require_relative 'cargo_train'
-require_relative 'passenger_train'
-require_relative 'station'
-require_relative 'route'
-require_relative 'cargo_wagon'
-require_relative 'passenger_wagon'
-require_relative 'helpers'
+%w[cargo_train passenger_train station route cargo_wagon passenger_wagon helpers accessors validation].each do |doc|
+  require_relative doc
+end
 require 'pry-byebug'
 
 first_message = "\nChoose action: create (element) / choose (element) / stop\n\n"
@@ -36,7 +32,7 @@ until action == 'stop'
     element = gets.chomp.to_sym
     puts "\nName your element"
     name = gets.chomp
-    if has_requiements?(element)
+    if requiements?(element)
       begin
         puts "\nWrite attributes with coma for #{element} (#{get_requirements_for(element)})\n\n"
         args = gets.chomp.split(', ')
